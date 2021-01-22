@@ -1,0 +1,916 @@
+{
+	"info": {
+		"_postman_id": "c19a0596-4086-4a44-ade8-61e60869f50f",
+		"name": "CURSO SOA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Gateway",
+			"item": [
+				{
+					"name": "auth",
+					"item": [
+						{
+							"name": "/oauth/token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"pm.collectionVariables.set(\"token\", \"Bearer \" + jsonData.access_token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "grant_type",
+											"value": "client_credentials",
+											"type": "text"
+										},
+										{
+											"key": "client_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "client_secret",
+											"value": "l8kCM8skxw7pHxNwpz9pTHeBW3UVPp8Ak09VGufq",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{GATEWAY_SERVICE_BASE_URL}}/oauth/token",
+									"host": [
+										"{{GATEWAY_SERVICE_BASE_URL}}"
+									],
+									"path": [
+										"oauth",
+										"token"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Users",
+					"item": [
+						{
+							"name": "Users List",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{GATEWAY_SERVICE_BASE_URL}}/users",
+									"host": [
+										"{{GATEWAY_SERVICE_BASE_URL}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "User Store",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Fabian Carvajal",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "inbox@edgcarmu.me",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "password",
+											"type": "text"
+										},
+										{
+											"key": "password_confirmation",
+											"value": "password",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{GATEWAY_SERVICE_BASE_URL}}/users",
+									"host": [
+										"{{GATEWAY_SERVICE_BASE_URL}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "User Show",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{GATEWAY_SERVICE_BASE_URL}}/users/1",
+									"host": [
+										"{{GATEWAY_SERVICE_BASE_URL}}"
+									],
+									"path": [
+										"users",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "User Update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Edgar Carvajal",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "fcarvajal@bamboo.cr",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "password",
+											"type": "text"
+										},
+										{
+											"key": "password_confirmation",
+											"value": "password",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{GATEWAY_SERVICE_BASE_URL}}/users/1",
+									"host": [
+										"{{GATEWAY_SERVICE_BASE_URL}}"
+									],
+									"path": [
+										"users",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "User Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{GATEWAY_SERVICE_BASE_URL}}/users/2",
+									"host": [
+										"{{GATEWAY_SERVICE_BASE_URL}}"
+									],
+									"path": [
+										"users",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Me",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{GATEWAY_SERVICE_BASE_URL}}/users/me",
+									"host": [
+										"{{GATEWAY_SERVICE_BASE_URL}}"
+									],
+									"path": [
+										"users",
+										"me"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "books",
+					"item": [
+						{
+							"name": "Book List",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{GATEWAY_SERVICE_BASE_URL}}/books",
+									"host": [
+										"{{GATEWAY_SERVICE_BASE_URL}}"
+									],
+									"path": [
+										"books"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Book Store",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Ya lo comenzo",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "Este es un buen libro",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "200",
+											"type": "text"
+										},
+										{
+											"key": "author_id",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{GATEWAY_SERVICE_BASE_URL}}/books",
+									"host": [
+										"{{GATEWAY_SERVICE_BASE_URL}}"
+									],
+									"path": [
+										"books"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Book Show",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{GATEWAY_SERVICE_BASE_URL}}/books/3",
+									"host": [
+										"{{GATEWAY_SERVICE_BASE_URL}}"
+									],
+									"path": [
+										"books",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Book Update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "title",
+											"value": "Padre Rico, Padre Pobre",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "“Padre Rico, Padre Pobre” es un libro obligado para aprender de finanzas personales, ya que explica inteligentes maneras de escapar de este circulo vicioso, en el que las personas trabajan muy duro toda su vida para otros, pero aún así no logran ahorrar nada.",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "320",
+											"type": "text"
+										},
+										{
+											"key": "author_id",
+											"value": "5",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{GATEWAY_SERVICE_BASE_URL}}/books/150",
+									"host": [
+										"{{GATEWAY_SERVICE_BASE_URL}}"
+									],
+									"path": [
+										"books",
+										"150"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Book Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{GATEWAY_SERVICE_BASE_URL}}/books/3",
+									"host": [
+										"{{GATEWAY_SERVICE_BASE_URL}}"
+									],
+									"path": [
+										"books",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "authors",
+					"item": [
+						{
+							"name": "Authors List",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{GATEWAY_SERVICE_BASE_URL}}/authors",
+									"host": [
+										"{{GATEWAY_SERVICE_BASE_URL}}"
+									],
+									"path": [
+										"authors"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Author Store",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Fabian",
+											"type": "text"
+										},
+										{
+											"key": "gender",
+											"value": "male",
+											"type": "text"
+										},
+										{
+											"key": "country",
+											"value": "Costa Rica",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{GATEWAY_SERVICE_BASE_URL}}/authors",
+									"host": [
+										"{{GATEWAY_SERVICE_BASE_URL}}"
+									],
+									"path": [
+										"authors"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Author Show",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{GATEWAY_SERVICE_BASE_URL}}/authors/1",
+									"host": [
+										"{{GATEWAY_SERVICE_BASE_URL}}"
+									],
+									"path": [
+										"authors",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Author Update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Fabian",
+											"type": "text"
+										},
+										{
+											"key": "gender",
+											"value": "male",
+											"type": "text"
+										},
+										{
+											"key": "country",
+											"value": "Costa Rica",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{GATEWAY_SERVICE_BASE_URL}}/authors/3",
+									"host": [
+										"{{GATEWAY_SERVICE_BASE_URL}}"
+									],
+									"path": [
+										"authors",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Author Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{GATEWAY_SERVICE_BASE_URL}}/authors/50",
+									"host": [
+										"{{GATEWAY_SERVICE_BASE_URL}}"
+									],
+									"path": [
+										"authors",
+										"50"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "BOOKS_SERVICE",
+			"item": [
+				{
+					"name": "Book List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BOOKS_SERVICE_BASE_URL}}/books",
+							"host": [
+								"{{BOOKS_SERVICE_BASE_URL}}"
+							],
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Book Store",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Ya lo comenzo",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Este es un buen libro",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "200",
+									"type": "text"
+								},
+								{
+									"key": "author_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BOOKS_SERVICE_BASE_URL}}/books",
+							"host": [
+								"{{BOOKS_SERVICE_BASE_URL}}"
+							],
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Book Show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BOOKS_SERVICE_BASE_URL}}/books/4",
+							"host": [
+								"{{BOOKS_SERVICE_BASE_URL}}"
+							],
+							"path": [
+								"books",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Book Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "Padre Rico, Padre Pobre",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "“Padre Rico, Padre Pobre” es un libro obligado para aprender de finanzas personales, ya que explica inteligentes maneras de escapar de este circulo vicioso, en el que las personas trabajan muy duro toda su vida para otros, pero aún así no logran ahorrar nada.",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "200",
+									"type": "text"
+								},
+								{
+									"key": "author_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BOOKS_SERVICE_BASE_URL}}/books/151",
+							"host": [
+								"{{BOOKS_SERVICE_BASE_URL}}"
+							],
+							"path": [
+								"books",
+								"151"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Book Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BOOKS_SERVICE_BASE_URL}}/books/149",
+							"host": [
+								"{{BOOKS_SERVICE_BASE_URL}}"
+							],
+							"path": [
+								"books",
+								"149"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AUTHORS_SERVICE",
+			"item": [
+				{
+					"name": "Author List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{AUTHORS_SERVICE_BASE_URL}}/authors",
+							"host": [
+								"{{AUTHORS_SERVICE_BASE_URL}}"
+							],
+							"path": [
+								"authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Author Store",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Fabian",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "male",
+									"type": "text"
+								},
+								{
+									"key": "country",
+									"value": "Costa Rica",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{AUTHORS_SERVICE_BASE_URL}}/authors",
+							"host": [
+								"{{AUTHORS_SERVICE_BASE_URL}}"
+							],
+							"path": [
+								"authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Author Show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{AUTHORS_SERVICE_BASE_URL}}/authors/1",
+							"host": [
+								"{{AUTHORS_SERVICE_BASE_URL}}"
+							],
+							"path": [
+								"authors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Author Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Edgar",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "male",
+									"type": "text"
+								},
+								{
+									"key": "country",
+									"value": "Costa Rica",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{AUTHORS_SERVICE_BASE_URL}}/authors/53",
+							"host": [
+								"{{AUTHORS_SERVICE_BASE_URL}}"
+							],
+							"path": [
+								"authors",
+								"53"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Author Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{AUTHORS_SERVICE_BASE_URL}}/authors/53",
+							"host": [
+								"{{AUTHORS_SERVICE_BASE_URL}}"
+							],
+							"path": [
+								"authors",
+								"53"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "AUTHORS_SERVICE_BASE_URL",
+			"value": "microserviceauthors.local"
+		},
+		{
+			"key": "BOOKS_SERVICE_BASE_URL",
+			"value": "microservicebooks.local"
+		},
+		{
+			"key": "GATEWAY_SERVICE_BASE_URL",
+			"value": "microservicegateway.local"
+		},
+		{
+			"key": "token",
+			"value": ""
+		}
+	]
+}
