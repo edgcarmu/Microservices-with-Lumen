@@ -12,6 +12,15 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
+
+/**
+ * Routes protected by user credentials
+ */
+$router->group(['middleware' => 'auth:api'], function () use ($router) {
+    $router->get('/users/me', 'UserController@me');
+});
+
+
 $router->group(['middleware' => 'client.credentials'], function () use ($router) {
     /**
      * Routes for authors
@@ -42,11 +51,4 @@ $router->group(['middleware' => 'client.credentials'], function () use ($router)
     $router->put('/users/{user}', 'UserController@update');
     $router->patch('/users/{user}', 'UserController@update');
     $router->delete('/users/{user}', 'UserController@destroy');
-});
-
-/**
- * Routes protected by user credentials
- */
-$router->group(['middleware' => 'auth:api'], function () use ($router) {
-    $router->get('/users/me', 'UserController@me');
 });
